@@ -1,5 +1,5 @@
 # Google Speech API + Naver TTS
-# 구글 음성 인식 API 서비스와 네이버 TTS의 합체 코드
+# 구글 음성 인식(Google Speech) API 서비스와 네이버 TTS(Clova Speech Synthesis:CSS)의 합체 코드
 
 
 <pre>
