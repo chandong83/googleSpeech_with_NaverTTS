@@ -7,8 +7,6 @@ import urllib.request
 
 client_id = "YOUR_CLIENT_ID"
 client_secret = "YOUR_CLIENT_SECRET"
-client_id = "J98NrWEQXQ_1wZnGmPQw"
-client_secret = "5XNMPh0LYT"
 
 url = "https://openapi.naver.com/v1/voice/tts.bin"
 
