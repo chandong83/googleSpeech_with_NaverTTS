@@ -78,6 +78,7 @@ class MicrophoneStream(object):
         # Create a thread-safe buffer of audio data
         self._buff = queue.Queue()
         self.closed = True
+        self.isPause = False
 
     def __enter__(self):
         self._audio_interface = pyaudio.PyAudio()
@@ -100,8 +101,8 @@ class MicrophoneStream(object):
     def __exit__(self, type, value, traceback):
         self._audio_stream.stop_stream()
         self._audio_stream.close()
-        
-        self.isPause = False
+
+
         self.closed = True
         # Signal the generator to terminate so that the client's
         # streaming_recognize method will not block the process termination.
@@ -188,7 +189,7 @@ def CommandProc(stt):
     return 1
 
 
-def listen_print_loop(responses):
+def listen_print_loop(responses, mic):
     """Iterates through server responses and prints them.
 
     The responses passed is a generator that will block until a response
@@ -231,8 +232,15 @@ def listen_print_loop(responses):
             num_chars_printed = len(transcript)
 
         else:
+            # 에코 방지용
+            #마이크 일시 중지
+            mic.pause()
+
             if CommandProc(transcript) == 0:
                 break;
+
+            #마이크 재 시작
+            mic.restart()
             """
                 # 원래 있던 코드는 주석처리
                 print(transcript + overwrite_chars)

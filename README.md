@@ -8,7 +8,9 @@ sudo apt-get install python3-dev
 sudo apt install portaudio19-dev
 sudo pip3 install pyaudio
 sudo pip3 install -r requirements.txt
+#ubuntu
 sudo apt-get install vlc
+
 export GOOGLE_APPLICATION_CREDENTIALS=[api key 위치.json]
 </pre>
 
@@ -19,6 +21,14 @@ file : naverTTS.py
 //네이버 KEY
 var client_id = '당신의 네이버 API ID';
 var client_secret = '당신의 네이버 API 암호키';
+
+
+def play(self, txt):
+...
+#외부 프로그램 사용 vlc
+#os.system('cvlc ' + tmpPlayPath + ' --play-and-exit')
+#라즈베리파이
+os.system('omxplayer ' + tmpPlayPath)
 ~~~~~
 
 

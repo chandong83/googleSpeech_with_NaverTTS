@@ -7,6 +7,8 @@ import urllib.request
 
 client_id = "YOUR_CLIENT_ID"
 client_secret = "YOUR_CLIENT_SECRET"
+client_id = "J98NrWEQXQ_1wZnGmPQw"
+client_secret = "5XNMPh0LYT"
 
 url = "https://openapi.naver.com/v1/voice/tts.bin"
 
@@ -45,9 +47,9 @@ class NaverTTS():
                 f.write(response_body)
 
             #외부 프로그램 사용 vlc
-            #os.system('cvlc ' + tmpPlayPath + ' --play-and-exit')
+            os.system('cvlc ' + tmpPlayPath + ' --play-and-exit')
             #라즈베리파이
-            os.system('omxplayer ' + tmpPlayPath)
+            #os.system('omxplayer ' + tmpPlayPath)
         else:
             print("Error Code:" + rescode)
 
