@@ -100,6 +100,8 @@ class MicrophoneStream(object):
     def __exit__(self, type, value, traceback):
         self._audio_stream.stop_stream()
         self._audio_stream.close()
+        
+        self.isPause = False
         self.closed = True
         # Signal the generator to terminate so that the client's
         # streaming_recognize method will not block the process termination.
@@ -119,6 +121,10 @@ class MicrophoneStream(object):
             chunk = self._buff.get()
             if chunk is None:
                 return
+
+            if self.isPause:
+                continue
+
             data = [chunk]
 
             # Now consume whatever other data's still buffered.
@@ -132,6 +138,14 @@ class MicrophoneStream(object):
                     break
 
             yield b''.join(data)
+
+    #일시 정지
+    def pause(self):
+        self.isPause = True
+
+    #재 시작
+    def restart(self):
+        self.isPause = False
 # [END audio_stream]
 
 
@@ -254,7 +268,7 @@ def main():
         responses = client.streaming_recognize(streaming_config, requests)
 
         # Now, put the transcription responses to use.
-        listen_print_loop(responses)
+        listen_print_loop(responses, stream)
 
 
 if __name__ == '__main__':

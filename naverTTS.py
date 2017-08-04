@@ -45,7 +45,9 @@ class NaverTTS():
                 f.write(response_body)
 
             #외부 프로그램 사용 vlc
-            os.system('cvlc ' + tmpPlayPath + ' --play-and-exit')
+            #os.system('cvlc ' + tmpPlayPath + ' --play-and-exit')
+            #라즈베리파이
+            os.system('omxplayer ' + tmpPlayPath)
         else:
             print("Error Code:" + rescode)
 
